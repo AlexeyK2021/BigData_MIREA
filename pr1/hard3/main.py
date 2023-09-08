@@ -2,36 +2,33 @@ access = dict()
 
 
 def add_access(file, mode):
-    mode_num = 0
-    for i in mode:
-        if i == "r":
-            mode_num += 1
-        elif i == "w":
-            mode_num += 2
-        elif i == "x":
-            mode_num += 4
-    access[file] = mode_num
+    access[file] = mode
 
 
 def check_access(file, mode):
-    mode_num = 0
-    if mode == "read" and access[file] % 2 == 1:
-        return "OK"
-    elif mode == "write" and access[file] // 2 % 2 == 1:
-        return "OK"
-    elif mode == "execute" and access[file] // 4 == 1:
-        return "OK"
+    if access.get(file, 0) == 0:
+        return "Access denied"
 
+    if mode == "read" and "r" in access[file]:
+        return "OK"
+    elif mode == "write" and "w" in access[file]:
+        return "OK"
+    elif mode == "execute" and "x" in access[file]:
+        return "OK"
     return "Access denied"
 
 
 if __name__ == '__main__':
     n = int(input())
     for i in range(n):
-        data = input().split(" ")
-        add_access(data[0], data[0:])
+        data = input()
+        file = data[:data.find(" ")]
+        mode = data[data.find(" ") + 1:]
+        add_access(file, mode)
 
     m = int(input())
     for i in range(m):
-        data = input().split(" ")
-        print(check_access(data[1], data[0]))
+        data = input()
+        op = data[:data.find(" ")]
+        file = data[data.find(" ") + 1:]
+        print(check_access(file, op))

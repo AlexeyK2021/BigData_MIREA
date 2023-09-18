@@ -1,6 +1,7 @@
 import pandas as pd
 import plotly as plt
-from collections import Counter
+
+COUNTRY_NUM = 30
 
 
 def print_info(data):
@@ -25,10 +26,31 @@ def delete_nulls(data):
         ]
 
 
+# 3.6 хз как
 def make_bar(countries, medals):
     fig = plt.graph_objs.Figure()
-    fig.add_trace(plt.graph_objs.Bar(x=countries, y=medals))
-    fig.update_layout(title="Количество медалей между командами из разных стран")
+    fig.add_trace(
+        plt.graph_objs.Bar(
+            x=countries,
+            y=medals,
+            marker=dict(color=medals, coloraxis="coloraxis")
+        )
+    )
+    fig.update_traces(marker_line_color='rgb(0,0,0)', marker_line_width=2)
+    fig.update_layout(
+        title=dict(
+            text="Distribution of the number of medals received by different countries since 1896",
+            font=dict(size=20, color='black'),
+            x=0.5,
+            y=1
+        ),
+        xaxis_title=dict(text="Country", font=dict(size=16, color='black')),
+        yaxis_title=dict(text="Medal quantity", font=dict(size=16, color='black')),
+        height=700,
+        margin=dict(l=0, r=0, t=0, b=0)
+    )
+    fig.update_xaxes(tickangle=315, gridwidth=2, gridcolor='ivory')
+    fig.update_yaxes(gridwidth=2, gridcolor='ivory')
     fig.show()
 
 
@@ -52,4 +74,4 @@ if __name__ == '__main__':
 
     # print(new_data["Team"].squeeze())
     # print(new_data[new_data["Medal"].notnull()]["Team"])
-    make_bar(countries=list(data_for_bar.keys())[:25], medals=list(data_for_bar.values())[:25])
+    make_bar(countries=list(data_for_bar.keys())[:COUNTRY_NUM], medals=list(data_for_bar.values())[:COUNTRY_NUM])

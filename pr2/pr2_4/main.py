@@ -1,12 +1,7 @@
 import pandas as pd
 from plotly import graph_objs as go
 
-COUNTRY_NUM = 30
-
-
-def print_info(data):
-    print(data.head())
-    print(data.info())
+COUNTRY_NUM = 15
 
 
 def delete_nulls(data):
@@ -26,14 +21,11 @@ def delete_nulls(data):
         ]
 
 
-# 3.6 хз как
-def make_bar(countries, medals):
+def make_pie(countries, medals):
     fig = go.Figure()
     fig.add_trace(
-        go.Bar(
-            x=countries,
-            y=medals,
-            marker=dict(color=medals, coloraxis="coloraxis")
+        go.Pie(
+            labels=countries, values=medals,
         )
     )
     fig.update_traces(marker_line_color='rgb(0,0,0)', marker_line_width=2)
@@ -76,4 +68,4 @@ if __name__ == '__main__':
 
     # print(new_data["Team"].squeeze())
     # print(new_data[new_data["Medal"].notnull()]["Team"])
-    make_bar(countries=list(data_for_bar.keys())[:COUNTRY_NUM], medals=list(data_for_bar.values())[:COUNTRY_NUM])
+    make_pie(countries=list(data_for_bar.keys())[:COUNTRY_NUM], medals=list(data_for_bar.values())[:COUNTRY_NUM])

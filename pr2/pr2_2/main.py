@@ -27,8 +27,8 @@ def delete_nulls(data):
 
 if __name__ == '__main__':
     data = pd.read_csv('../dataset_olympics.csv', sep=",")
-    print_info(data)
+    # print_info(data)
 
-    print(len(data))
+    print("Всего строк: " + str(len(data)))
     new_data = delete_nulls(data)
-    print(len(new_data))
+    print("Количество подходящих строк: "+str(len(new_data)))

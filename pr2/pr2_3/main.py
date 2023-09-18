@@ -26,7 +26,6 @@ def delete_nulls(data):
         ]
 
 
-# 3.6 хз как
 def make_bar(countries, medals):
     fig = go.Figure()
     fig.add_trace(
@@ -59,9 +58,9 @@ def make_bar(countries, medals):
 if __name__ == '__main__':
     data = pd.read_csv('../dataset_olympics.csv', sep=",")
 
-    # print(len(data))
+    print("Всего строк: " + str(len(data)))
     new_data = delete_nulls(data)
-    # print(len(new_data))
+    print("Количество подходящих строк: " + str(len(new_data)))
 
     data_for_bar = dict()
 
@@ -70,10 +69,4 @@ if __name__ == '__main__':
             data_for_bar[row['Team']] = 1
         else:
             data_for_bar[row['Team']] += 1
-        # print(f"{row['Name']} {row['Medal']}")
-    # print(data_for_bar)
-    # make_bar(data_for_bar)
-
-    # print(new_data["Team"].squeeze())
-    # print(new_data[new_data["Medal"].notnull()]["Team"])
     make_bar(countries=list(data_for_bar.keys())[:COUNTRY_NUM], medals=list(data_for_bar.values())[:COUNTRY_NUM])

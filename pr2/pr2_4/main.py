@@ -51,9 +51,9 @@ def make_pie(countries, medals):
 if __name__ == '__main__':
     data = pd.read_csv('../dataset_olympics.csv', sep=",")
 
-    # print(len(data))
+    print("Всего строк: " + str(len(data)))
     new_data = delete_nulls(data)
-    # print(len(new_data))
+    print("Количество подходящих строк: " + str(len(new_data)))
 
     data_for_bar = dict()
 

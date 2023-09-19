@@ -1,7 +1,7 @@
 import pandas as pd
 from plotly import graph_objs as go
 
-COUNTRY_NUM = 15
+COUNTRY_NUM = 50
 
 
 def delete_nulls(data):
@@ -38,13 +38,11 @@ def make_pie(countries, medals):
         ),
         xaxis_title=dict(text="Country", font=dict(size=16, color='black')),
         yaxis_title=dict(text="Medal quantity", font=dict(size=16, color='black')),
-        xaxis_tickfont_size=14,
-        yaxis_tickfont_size=14,
         height=700,
         margin=dict(l=0, r=0, t=20, b=0)
     )
-    fig.update_xaxes(tickangle=315, gridwidth=2, gridcolor='ivory')
-    fig.update_yaxes(gridwidth=2, gridcolor='ivory')
+    fig.update_xaxes(tickangle=315, gridwidth=2, gridcolor='ivory', tickfont_size=14)
+    fig.update_yaxes(gridwidth=2, gridcolor='ivory', tickfont_size=14)
     fig.show()
 
 
@@ -62,10 +60,27 @@ if __name__ == '__main__':
             data_for_bar[row['Team']] = 1
         else:
             data_for_bar[row['Team']] += 1
-        # print(f"{row['Name']} {row['Medal']}")
-    # print(data_for_bar)
-    # make_bar(data_for_bar)
 
-    # print(new_data["Team"].squeeze())
-    # print(new_data[new_data["Medal"].notnull()]["Team"])
-    make_pie(countries=list(data_for_bar.keys())[:COUNTRY_NUM], medals=list(data_for_bar.values())[:COUNTRY_NUM])
+    medals = list(data_for_bar.values())[:COUNTRY_NUM]
+    countries = list(data_for_bar.keys())[:COUNTRY_NUM]
+    all_medals = sum(medals)
+
+    new_countries_list = list()
+    new_medals_list = list()
+
+    for i in range(len(countries) - 1):
+        if medals[i] / all_medals > 0.01:
+            new_countries_list.append(countries[i])
+            new_medals_list.append(medals[i])
+
+    new_medals_list.append(all_medals - sum(new_medals_list))
+    new_countries_list.append("Other")
+
+    #
+    # data_for_bar["other"] = 0
+    # for i in range(COUNTRY_NUM):
+    #     perc = medals[i] / all_medals
+    #     if perc < 0.01:
+    #         data_for_bar["Other"] += perc
+
+    make_pie(countries=new_countries_list, medals=new_medals_list)

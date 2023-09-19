@@ -45,13 +45,11 @@ def make_bar(countries, medals):
         ),
         xaxis_title=dict(text="Country", font=dict(size=16, color='black')),
         yaxis_title=dict(text="Medal quantity", font=dict(size=16, color='black')),
-        xaxis_tickfont_size=14,
-        yaxis_tickfont_size=14,
         height=700,
         margin=dict(l=0, r=0, t=20, b=0)
     )
-    fig.update_xaxes(tickangle=315, gridwidth=2, gridcolor='ivory')
-    fig.update_yaxes(gridwidth=2, gridcolor='ivory')
+    fig.update_xaxes(tickangle=315, gridwidth=2, gridcolor='ivory', tickfont_size=14)
+    fig.update_yaxes(gridwidth=2, gridcolor='ivory', tickfont_size=14)
     fig.show()
 
 
@@ -70,3 +68,7 @@ if __name__ == '__main__':
         else:
             data_for_bar[row['Team']] += 1
     make_bar(countries=list(data_for_bar.keys())[:COUNTRY_NUM], medals=list(data_for_bar.values())[:COUNTRY_NUM])
+
+# # print(new_data["Team"].squeeze())
+# # print(new_data[new_data["Medal"].notnull()]["Team"])
+# make_bar(countries=list(data_for_bar.keys())[:country_number], medals=list(data_for_bar.values())[:country_number])

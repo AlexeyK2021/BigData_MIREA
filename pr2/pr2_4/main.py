@@ -46,13 +46,7 @@ def make_pie(countries, medals):
     fig.show()
 
 
-if __name__ == '__main__':
-    data = pd.read_csv('../dataset_olympics.csv', sep=",")
-
-    print("Всего строк: " + str(len(data)))
-    new_data = delete_nulls(data)
-    print("Количество подходящих строк: " + str(len(new_data)))
-
+def get_data_for_bar(new_data):
     data_for_bar = dict()
 
     for index, row in new_data[new_data["Medal"].notnull()].iterrows():
@@ -75,12 +69,12 @@ if __name__ == '__main__':
 
     new_medals_list.append(all_medals - sum(new_medals_list))
     new_countries_list.append("Other")
+    return new_countries_list, new_medals_list
 
-    #
-    # data_for_bar["other"] = 0
-    # for i in range(COUNTRY_NUM):
-    #     perc = medals[i] / all_medals
-    #     if perc < 0.01:
-    #         data_for_bar["Other"] += perc
 
-    make_pie(countries=new_countries_list, medals=new_medals_list)
+if __name__ == '__main__':
+    data = pd.read_csv('../dataset_olympics.csv', sep=",")
+
+    new_data = delete_nulls(data)
+
+    make_pie(*get_data_for_bar(new_data))

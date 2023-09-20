@@ -46,7 +46,7 @@ def make_pie(countries, medals):
     fig.show()
 
 
-def get_data_for_bar(new_data):
+def get_data_for_pie(new_data):
     data_for_bar = dict()
 
     for index, row in new_data[new_data["Medal"].notnull()].iterrows():
@@ -77,4 +77,4 @@ if __name__ == '__main__':
 
     new_data = delete_nulls(data)
 
-    make_pie(*get_data_for_bar(new_data))
+    make_pie(*get_data_for_pie(new_data))

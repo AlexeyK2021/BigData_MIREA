@@ -1,5 +1,4 @@
 import pandas as pd
-import matplotlib as mp
 import matplotlib.pyplot as plt
 
 
@@ -75,7 +74,7 @@ if __name__ == '__main__':
     data = pd.read_csv('../dataset_olympics.csv', sep=",")
 
     new_data = delete_nulls(data)
-    print(get_participants_count_over_years(new_data))
+
     make_plot(
         *get_participants_count_over_years(new_data),
         plot_name='Dependence of the quantity of participants on the year',
@@ -91,5 +90,3 @@ if __name__ == '__main__':
         plot_name='Dependence of the maximum weight of participants on the year',
         y_name='Participants maximum weight'
     )
-    print()
-    # print(get_max_width_over_years(new_data))

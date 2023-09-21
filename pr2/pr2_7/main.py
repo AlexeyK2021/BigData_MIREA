@@ -1,5 +1,5 @@
 import pandas as pd
-import umap
+from umap import UMAP
 import seaborn as sns
 from matplotlib import pyplot as plt
 
@@ -20,7 +20,47 @@ if __name__ == '__main__':
 
     for i in range(len(neighbours_num)):
         for j in range(len(min_distance)):
-            um[neighbours_num[i], min_distance[j]] = (umap.UMAP(n_neighbors=neighbours_num[i], min_dist=min_distance[j], random_state=123).fit_transform(DATA))
+            um[neighbours_num[i], min_distance[j]] = (
+                UMAP(n_neighbors=neighbours_num[i], min_dist=min_distance[j], random_state=123).fit_transform(DATA))
 
-    sns.scatterplot(data=DATA, palette='bright')
+    DATA = new_data.copy()
+    DATA['x'] = um[(5, 0.1)][:, 0]
+    DATA['y'] = um[(5, 0.1)][:, 1]
+    plt.title(label='neighbours_num=5; min_distance=0.1')
+    sns.scatterplot(x='x', y='y', data=DATA, hue=data['quality'], palette='bright')
+    plt.show()
+
+    DATA = new_data.copy()
+    DATA['x'] = um[(5, 0.6)][:, 0]
+    DATA['y'] = um[(5, 0.6)][:, 1]
+    plt.title(label='neighbours_num=5; min_distance=0.6')
+    sns.scatterplot(x='x', y='y', data=DATA, hue=data['quality'], palette='bright')
+    plt.show()
+
+    DATA = new_data.copy()
+    DATA['x'] = um[(25, 0.1)][:, 0]
+    DATA['y'] = um[(25, 0.1)][:, 1]
+    plt.title(label='neighbours_num=25; min_distance=0.1')
+    sns.scatterplot(x='x', y='y', data=DATA, hue=data['quality'], palette='bright')
+    plt.show()
+
+    DATA = new_data.copy()
+    DATA['x'] = um[(25, 0.6)][:, 0]
+    DATA['y'] = um[(25, 0.6)][:, 1]
+    plt.title(label='neighbours_num=25; min_distance=0.6')
+    sns.scatterplot(x='x', y='y', data=DATA, hue=data['quality'], palette='bright')
+    plt.show()
+
+    DATA = new_data.copy()
+    DATA['x'] = um[(50, 0.1)][:, 0]
+    DATA['y'] = um[(50, 0.1)][:, 1]
+    plt.title(label='neighbours_num=50; min_distance=0.1')
+    sns.scatterplot(x='x', y='y', data=DATA, hue=data['quality'], palette='bright')
+    plt.show()
+
+    DATA = new_data.copy()
+    DATA['x'] = um[(50, 0.6)][:, 0]
+    DATA['y'] = um[(50, 0.6)][:, 1]
+    plt.title(label='neighbours_num=50; min_distance=0.6')
+    sns.scatterplot(x='x', y='y', data=DATA, hue=data['quality'], palette='bright')
     plt.show()

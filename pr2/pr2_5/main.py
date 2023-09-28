@@ -57,7 +57,7 @@ def make_plot(year, value, plot_name, y_name, x_name='Year'):
     params = {
         'lines.markerfacecolor': 'white',
         'lines.markeredgecolor': 'black',
-        'lines.marker': 'o',
+        'lines.marker': '.',
         'lines.markersize': 2
     }
     plt.rcParams.update(params)

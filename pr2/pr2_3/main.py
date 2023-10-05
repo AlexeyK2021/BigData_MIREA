@@ -22,8 +22,7 @@ def delete_nulls(data):
         data["Season"].notnull() &
         data["City"].notnull() &
         data["Sport"].notnull() &
-        data["Event"].notnull()
-        ]
+        data["Event"].notnull()]
 
 
 def make_bar(countries, medals):

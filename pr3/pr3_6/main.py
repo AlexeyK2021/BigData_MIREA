@@ -29,7 +29,6 @@ if __name__ == '__main__':
     for l in (1, 5, 20, 50):
         res = pd.Series(cpt(data["charges"], l, 300))
         std = res.std()
-
         avg = np.mean(res)
         print(f"Стандартное отклонение: {std}, Среднее арифметическое: {avg}")
         make_hist(res, f"Длина выборки: {l}", avg)

@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 if __name__ == '__main__':
@@ -12,4 +13,9 @@ if __name__ == '__main__':
     data = data.drop(["geoId", "Cumulative_number_for_14_days_of_COVID-19_cases_per_100000"], axis=1)
     print(data[data.notnull()].count().sort_values(ascending=False))
 
-    data.replace()
+    data["countryterritoryCode"].fillna("OTHER", inplace=True)
+
+    med = np.median(data[data["popData2019"].notnull()].get("popData2019"))
+    # print(med)
+    data["popData2019"].fillna(med, inplace=True)
+    print(data[data.notnull()].count().sort_values(ascending=False))

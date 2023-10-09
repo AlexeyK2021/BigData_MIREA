@@ -14,8 +14,8 @@ def make_bmi_hist(data, title):
     iqr = np.percentile(data, 25, method="midpoint") - np.percentile(data, 75, method="midpoint")
 
     print("Индекс Массы тела:")
-    print(f"Мода: {moda}, Медиана: {med}, Среднее: {avg}")
-    print(f"Размах: {raz}, Стандартное отклонение: {std}, Межквартильный размах: {iqr}")
+    print(f"\tМода: {moda}, Медиана: {med}, Среднее: {avg}")
+    print(f"\tРазмах: {raz}, Стандартное отклонение: {std}, Межквартильный размах: {iqr}")
 
     plt.hist(data)
     plt.axvline(x=moda, color="red", label="Мода")
@@ -36,8 +36,8 @@ def make_charges_hist(data, title):
     iqr = np.percentile(data, 25, method="midpoint") - np.percentile(data, 75, method="midpoint")
 
     print("Расходы:")
-    print(f"Мода: {moda}, Медиана: {med}, Среднее: {avg}")
-    print(f"Размах: {raz}, Стандартное отклонение: {std}, Межквартильный размах: {iqr}")
+    print(f"\tМода: {moda}, Медиана: {med}, Среднее: {avg}")
+    print(f"\tРазмах: {raz}, Стандартное отклонение: {std}, Межквартильный размах: {iqr}")
 
     plt.hist(data)
     plt.axvline(x=moda, color="red", label="Мода")

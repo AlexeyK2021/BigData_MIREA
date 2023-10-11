@@ -14,3 +14,6 @@ if __name__ == '__main__':
 
     bartlett = sts.bartlett(southwest,northwest)
     print(f"Bartlett:\t{bartlett}")
+
+    t_student = sts.ttest_ind(southwest, northwest)
+    print(f"T-Student test: \t{t_student}")

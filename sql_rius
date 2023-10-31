@@ -1,0 +1,23 @@
+create table equipment_type
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(128)
+);
+
+create table parameter_category
+(
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(128)
+);
+
+create table equipment
+(
+    id                SERIAL PRIMARY KEY,
+    name              TEXT NOT NULL,
+    location          TEXT NOT NULL,
+    equipment_type_id INT REFERENCES equipment_type (id)
+);
+
+insert into equipment_type (name) values ('Печь');
+insert into parameter_category (name) values ('Температура'), ('Давление'), ('Скорость вращения');
+insert into equipment (name, location, equipment_type_id) VALUES ('Электродная печь', 'А-1',1);

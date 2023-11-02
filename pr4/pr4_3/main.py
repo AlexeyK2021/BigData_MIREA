@@ -33,4 +33,19 @@ if __name__ == '__main__':
     tukey.plot_simultaneous()
     # plt.vlines(x=49.57, ymin=-0.5, ymax=4.5, color="red")
     print(tukey.summary())
+    plt.show()  # Интервалы перекрываются => различия не существенные
+
+    new_data = fixed_data = data[["region", "bmi", "sex"]].replace(["southwest", "northwest", "male", "female"],
+                                                                   [1, 2, 1, 2])
+    model2 = ols("bmi ~ region + sex", data=new_data).fit()
+    anova2_res = sm.stats.anova_lm(model2)
+    print(anova2_res)
+
+    plt.figure()
+    data["combination"] = data["region"] + " / " + data["sex"]
+    tukey2 = pairwise_tukeyhsd(endog=data["bmi"], groups=data["combination"], alpha=0.05)
+    tukey2.plot_simultaneous()
+    print(tukey2.summary())
+    plt.savefig("tukey2", bbox_inches='tight')
     plt.show()
+

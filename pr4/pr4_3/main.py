@@ -19,7 +19,6 @@ if __name__ == '__main__':
     print("Scipy library: \n\t" + str(stats.f_oneway(southwest, northwest, southeast, northeast)))  # pvalue = 2,91*10^-18 < 0,05 => присутствует различие; фактор региона оказывает влияение на ИМТ
 
     print("Statsmodels library:")
-    # print(southwest, northwest)
     fixed_data = data[["region", "bmi"]]
     model = ols("bmi ~ region", data=fixed_data).fit()
     anova_res = sm.stats.anova_lm(model, type=2)
@@ -42,7 +41,6 @@ if __name__ == '__main__':
 
     tukey = pairwise_tukeyhsd(endog=data["bmi"], groups=data["region"], alpha=0.05)
     tukey.plot_simultaneous()
-    # plt.vlines(x=49.57, ymin=-0.5, ymax=4.5, color="red")
     print(tukey.summary())
     plt.show()  # Интервалы перекрываются => различия не существенные
 

@@ -5,42 +5,45 @@ import seaborn as sns
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
-#
-# def mserror(x, w1, w0, y):
-#     ypred = w1 * x[:, 0] + w0
-#     return np.sum((y - ypred) ** 2) / len(ypred)
-#
-#
-# def gr_mserror(x, w1, w0, y):
-#     ypred = w1 * x[:, 0] + w0
-#     return np.array([2 / len(x) * np.sum((y - ypred)) * (-1)])
-#
-#
-# def regression(x, y):
-#     eps = 0.0001
-#     w1 = 0
-#     w0 = 0
-#
-#     learning_rate = 0.001
-#     next_w1 = w1
-#     next_w0 = w0
-#
-#     n = 100000
-#
-#     for i in range(n):
-#         cur_w1 = next_w1
-#         cur_w0 = next_w0
-#         err = gr_mserror(x, cur_w1, cur_w0, y)
-#         next_w0 = cur_w0 - learning_rate * err[0]
-#         next_w1 = cur_w1 - learning_rate * err[0]
-#         print(f"Итерация {i}:")
-#         print(f"Текущая точка {cur_w1, cur_w0}| Следущая точка {next_w1, next_w0}")
-#         print(f"MSE = {mserror(x, cur_w1, cur_w0, y)}")
-#         print("--------------------------------------------------------------------")
-#
-#         if (abs(cur_w1 - next_w1) <= eps) and (abs(cur_w0 - next_w0) <= eps):
-#             break
-#
+
+def mserror(x, w1, w0, y):
+    ypred = w1 * x[:, 0] + w0
+    return np.sum((y - ypred) ** 2) / len(ypred)
+
+
+def gr_mserror(x, w1, w0, y):
+    ypred = w1 * x[:, 0] + w0
+    return np.array([
+        2 / len(x) * np.sum((y - ypred)) * (-1),
+        2 / len(x) * np.sum((y - ypred) * (-x[:, 0]))
+    ])
+
+
+def regression(x, y):
+    eps = 0.0001
+    w1 = 0
+    w0 = 0
+
+    learning_rate = 0.001
+    next_w1 = w1
+    next_w0 = w0
+
+    n = 100000
+
+    for i in range(n):
+        cur_w1 = next_w1
+        cur_w0 = next_w0
+        err = gr_mserror(x, cur_w1, cur_w0, y)
+        next_w0 = cur_w0 - learning_rate * err[0]
+        next_w1 = cur_w1 - learning_rate * err[0]
+        print(f"Итерация {i}:")
+        print(f"Текущая точка {cur_w1, cur_w0}| Следущая точка {next_w1, next_w0}")
+        print(f"MSE = {mserror(x, cur_w1, cur_w0, y)}")
+        print("--------------------------------------------------------------------")
+
+        if (abs(cur_w1 - next_w1) <= eps) and (abs(cur_w0 - next_w0) <= eps):
+            return next_w0, next_w1, mserror(x, cur_w1, cur_w0, y)
+
 
 if __name__ == '__main__':
     data = pd.read_csv("../smartphones.csv", sep=",")
@@ -60,6 +63,10 @@ if __name__ == '__main__':
     y = data["price"]
     x = np.array(x, type(float))
     y = np.array(y, type(float))
+
+    w0, w1, mse = regression(x, y)
+    print(f"Угол наклона = {w1}\nКоэффициент сдвига = {w0}\nMSE={mse}")
+
     lin_reg.fit(x, y)
     print(f"Угол наклона = {lin_reg.coef_[0]}\nКоэффициент сдвига = {lin_reg.intercept_}")
 

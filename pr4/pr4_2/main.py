@@ -75,7 +75,7 @@ if __name__ == '__main__':
     y_func = a * x + b
 
     plt.plot(x, y_func, linewidth=2, color="r", label=f"y(x)= {a:.2f}x + {b:.2f}")
-    plt.scatter(x, y_func, alpha=0.7)
+    plt.scatter(x, y, alpha=0.7)
     plt.grid()
     plt.xlabel("Price")
     plt.ylabel("Internal memory size")

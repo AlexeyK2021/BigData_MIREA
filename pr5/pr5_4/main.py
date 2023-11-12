@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import sklearn
 import plotly.express as px
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, classification_report
@@ -25,16 +24,16 @@ if __name__ == '__main__':
     x_train, x_test, y_train, y_test = train_test_split(predictors, target, train_size=0.8, shuffle=True,
                                                         random_state=123)
 
-    print(predictors.head(5))
-    print("Целевая переменная")
-    print(target.head(5))
+    # print(predictors.head(5))
+    # print("Целевая переменная")
+    # print(target.head(5))
 
     model = LogisticRegression(random_state=123)  # Логистическая регрессия
     model.fit(x_train, y_train)
     y_pred = model.predict(x_test)
     print(f"Предсказанные значения {y_pred}")
     print(f"Исходные значения {np.array(y_test)}")
-
+    print(classification_report(y_pred, y_test))
     show_matrix(y_test, y_pred)
 
     param_kernels = ("linear", "rbf", "poly", "sigmoid")  # SVM
@@ -46,12 +45,6 @@ if __name__ == '__main__':
     print(f"Best model: {best_model.kernel}")
     svm_preds = best_model.predict(x_test)
     print(classification_report(svm_preds, y_test))
-
-    # plt.rcParams["figure.figsize"] = (10, 10)
-    # fig = px.imshow(confusion_matrix(y_test, svm_preds), text_auto=True)
-    # # plt.colorbar()
-    # fig.update_layout(xaxis_title="Target", yaxis_title="Prediction")
-    # fig.show()
     show_matrix(y_test, svm_preds)
 
     number_of_neighbors = np.arange(3, 10)
@@ -63,10 +56,4 @@ if __name__ == '__main__':
     print(f"KNN Best Estimator: {grid_search_knn.best_estimator_}")
     knn_preds = grid_search_knn.predict(x_test)
     print(classification_report(knn_preds, y_test))
-
-    # plt.rcParams["figure.figsize"] = (10, 10)
-    # fig = px.imshow(confusion_matrix(y_test, knn_preds), text_auto=True)
-    # # plt.colorbar()
-    # fig.update_layout(xaxis_title="Target", yaxis_title="Prediction")
-    # fig.show()
     show_matrix(y_test, knn_preds)

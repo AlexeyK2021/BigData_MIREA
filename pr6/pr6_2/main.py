@@ -4,6 +4,7 @@ from matplotlib.figure import Figure
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 import plotly.graph_objs as go
+from sklearn.preprocessing import MaxAbsScaler
 
 
 def make_plot(xvalues, yvalues, xlabel, ylabel):
@@ -37,6 +38,7 @@ if __name__ == '__main__':
     # print(model1.cluster_centers_)
     data["Cluster"] = model1.labels_
     print(data["Cluster"].value_counts())
+
     fig = go.Figure(data=[go.Scatter(x=data["MntWines"],
                                      y=data["Income"],
                                      mode="markers",
@@ -47,10 +49,11 @@ if __name__ == '__main__':
     fig.show()
 
     # fig = go.Figure(data=[go.Scatter3d(x=data["MntWines"],
-    #                                  y=data["Income"],
-    #                                  mode="markers",
-    #                                  marker_color=data["Cluster"]
-    #                                  )])
+    #                                    y=data["Income"],
+    #                                    z=data["NumStorePurchases"],
+    #                                    mode="markers",
+    #                                    marker_color=data["Cluster"]
+    #                                    )])
     # fig.show()
 
     # corr_price = data.corr()["Income"].to_frame().round(2)

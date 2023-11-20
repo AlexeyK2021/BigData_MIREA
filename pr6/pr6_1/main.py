@@ -2,11 +2,11 @@ import pandas as pd
 from sklearn.preprocessing import MaxAbsScaler
 
 
-def normalize(data):
-    scaler = MaxAbsScaler()
-    scaler.fit(data)
-    new_data = pd.DataFrame(scaler.transform(data), columns=data.columns)
-    return new_data
+# def normalize(data):
+#     scaler = MaxAbsScaler()
+#     scaler.fit(data)
+#     new_data = pd.DataFrame(scaler.transform(data), columns=data.columns)
+#     return new_data
 
 
 if __name__ == '__main__':
@@ -19,5 +19,5 @@ if __name__ == '__main__':
     # data = data.drop(["Education", "Marital_Status", "ID", "Dt_Customer", "Year_Birth"], axis=1)
     #
     # new_data = normalize(data)
-    # 
+    #
     # print(new_data)

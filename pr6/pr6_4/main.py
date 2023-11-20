@@ -1,14 +1,22 @@
 import pandas as pd
 from sklearn.cluster import DBSCAN
 import plotly.graph_objs as go
+from sklearn.preprocessing import MaxAbsScaler
+
+
+def normalize(data):
+    scaler = MaxAbsScaler()
+    scaler.fit(data)
+    new_data = pd.DataFrame(scaler.transform(data), columns=data.columns)
+    return new_data
 
 
 if __name__ == '__main__':
     data = pd.read_csv("../marketing_campaign.csv", sep="\t")
     data = data.dropna()
-    data = data.drop(["Education", "Marital_Status", "ID", "Dt_Customer"], axis=1)
+    data = data.drop(["Education", "Marital_Status", "ID", "Dt_Customer", "Year_Birth"], axis=1)
 
-    model3 = DBSCAN(eps=230, min_samples=4).fit(data)
+    model3 = DBSCAN(eps=240, min_samples=5).fit(data)
     data["Cluster"] = model3.labels_
 
     fig = go.Figure(data=[go.Scatter(x=data["MntWines"],

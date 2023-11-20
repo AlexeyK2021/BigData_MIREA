@@ -16,7 +16,9 @@ def make_plot(xvalues, yvalues, xlabel, ylabel):
 
 
 if __name__ == '__main__':
-    data = pd.read_csv("../wine-clustering.csv", sep=",")
+    data = pd.read_csv("../marketing_campaign.csv", sep="\t")
+    data = data.dropna()
+    data = data.drop(["Education", "Marital_Status", "ID", "Dt_Customer"], axis=1)
 
     models = list()
     score = list()
@@ -35,9 +37,21 @@ if __name__ == '__main__':
     # print(model1.cluster_centers_)
     data["Cluster"] = model1.labels_
     print(data["Cluster"].value_counts())
-    fig = go.Figure(data=[go.Scatter(x=data["Alcohol"],
-                                     y=data["Ash"],
+    fig = go.Figure(data=[go.Scatter(x=data["MntWines"],
+                                     y=data["Income"],
                                      mode="markers",
                                      marker_color=data["Cluster"]
                                      )])
+    fig.update_layout(xaxis_title="Amount spent on wine in last 2 years",
+                      yaxis_title="Customer's yearly household income")
     fig.show()
+
+    # fig = go.Figure(data=[go.Scatter3d(x=data["MntWines"],
+    #                                  y=data["Income"],
+    #                                  mode="markers",
+    #                                  marker_color=data["Cluster"]
+    #                                  )])
+    # fig.show()
+
+    # corr_price = data.corr()["Income"].to_frame().round(2)
+    # print(corr_price)

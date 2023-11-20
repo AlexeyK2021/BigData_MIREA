@@ -18,7 +18,7 @@ def make_plot(xvalues, yvalues, xlabel, ylabel):
 if __name__ == '__main__':
     data = pd.read_csv("../marketing_campaign.csv", sep="\t")
     data = data.dropna()
-    data = data.drop(["Education", "Marital_Status", "ID", "Dt_Customer"], axis=1)
+    data = data.drop(["Education", "Marital_Status", "ID", "Dt_Customer", "Year_Birth"], axis=1)
 
     models = list()
     score = list()

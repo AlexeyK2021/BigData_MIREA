@@ -6,3 +6,4 @@ sklearn
 seaborn
 umap-learn
 statsmodels
+catboost

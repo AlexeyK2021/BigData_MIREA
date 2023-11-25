@@ -1,14 +1,6 @@
 import pandas as pd
 from sklearn.cluster import DBSCAN
 import plotly.graph_objs as go
-from sklearn.preprocessing import MaxAbsScaler
-
-
-def normalize(data):
-    scaler = MaxAbsScaler()
-    scaler.fit(data)
-    new_data = pd.DataFrame(scaler.transform(data), columns=data.columns)
-    return new_data
 
 
 if __name__ == '__main__':

@@ -160,3 +160,5 @@ cython_debug/
 #.idea/
 
 .idea/misc.xml
+/pr7/pr7_3/catboost_info/
+/pr7/pr7_3/catboost_info/

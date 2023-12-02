@@ -51,10 +51,10 @@ if __name__ == '__main__':
     for i in range(len(rules4) - 1):
         print(f"{i + 1}. {rules4[i]}")
 
-    print(f"Время работы apriori_python:{t[0]}")
-    print(f"Время работы apyori:{t[1]}")
-    print(f"Время работы efficient_apriori:{t[2]}")
-    print(f"Время работы fpgrowth_py:{t[3]}")
+    print(f"Время работы apriori_python:{t[0]} с.")
+    print(f"Время работы apyori:{t[1]} с.")
+    print(f"Время работы efficient_apriori:{t[2]} с.")
+    print(f"Время работы fpgrowth_py:{t[3]} с.")
 
     plt.bar(["apriori_python", "apyori", "efficient_apriori", "fpgrowth_py"],t,
             label="Сравнение скорости работы алгоритмов")
